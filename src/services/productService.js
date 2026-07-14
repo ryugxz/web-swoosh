@@ -1,9 +1,15 @@
+import BaseRepository from './baseRepository';
+
 /**
  * Product Service
- * Phase 2: Jersey/merchandise catalog operations
+ * Manages Product CRUD operations
  */
+class ProductService extends BaseRepository {
+  constructor() {
+    super('products');
+  }
 
-// export const getProducts = async () => {};
-// export const getProductById = async (id) => {};
-// export const addProduct = async (productData) => {};
-// export const updateProduct = async (id, productData) => {};
+  // Add specific product methods here if needed
+}
+
+export const productService = new ProductService();

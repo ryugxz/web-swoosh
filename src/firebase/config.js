@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAnalytics } from 'firebase/analytics';
-// import { getAuth } from 'firebase/auth';
-// import { getStorage } from 'firebase/storage';
+import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 
 /**
  * Firebase configuration
@@ -22,10 +22,8 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-// Phase 2: Uncomment when implementing authentication
-// const auth = getAuth(app);
+// Initialize Authentication and Storage
+const auth = getAuth(app);
+const storage = getStorage(app);
 
-// Phase 2: Uncomment when implementing file storage
-// const storage = getStorage(app);
-
-export { app, db, analytics };
+export { app, db, analytics, auth, storage };

@@ -1,9 +1,17 @@
+import BaseRepository from './baseRepository';
+
 /**
  * Order Service
- * Phase 2: Order management operations
+ * Manages Order CRUD operations
  */
+class OrderService extends BaseRepository {
+  constructor() {
+    super('orders');
+  }
 
-// export const createOrder = async (orderData) => {};
-// export const getOrderById = async (id) => {};
-// export const getUserOrders = async (userId) => {};
-// export const updateOrderStatus = async (id, status) => {};
+  async getUserOrders(userId) {
+    return await this.getByQuery('userId', '==', userId);
+  }
+}
+
+export const orderService = new OrderService();

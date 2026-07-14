@@ -1,9 +1,15 @@
+import BaseRepository from './baseRepository';
+
 /**
  * Match Service
- * Phase 2: Match results and fixtures operations
+ * Manages Match CRUD operations
  */
+class MatchService extends BaseRepository {
+  constructor() {
+    super('matches');
+  }
 
-// export const getMatches = async () => {};
-// export const getMatchById = async (id) => {};
-// export const getUpcomingMatches = async () => {};
-// export const getMatchResults = async () => {};
+  // Add specific match methods here if needed
+}
+
+export const matchService = new MatchService();

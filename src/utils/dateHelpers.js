@@ -18,3 +18,18 @@ export const calculateAge = (dateString) => {
   }
   return age;
 };
+
+/**
+ * Format a Date object to a readable string
+ * @param {Date} date 
+ * @returns {string} Formatted date (e.g., 'Jan 1, 2024')
+ */
+export const formatDate = (date) => {
+  if (!date) return '';
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric'
+  }).format(date);
+};
+

@@ -1,9 +1,17 @@
+import BaseRepository from './baseRepository';
+
 /**
  * Registration Service
- * Phase 2: Team registration operations
+ * Manages Registration CRUD operations
  */
+class RegistrationService extends BaseRepository {
+  constructor() {
+    super('registrations');
+  }
 
-// export const submitRegistration = async (registrationData) => {};
-// export const getRegistrations = async () => {};
-// export const approveRegistration = async (id) => {};
-// export const rejectRegistration = async (id) => {};
+  async getUserRegistrations(userId) {
+    return await this.getByQuery('userId', '==', userId);
+  }
+}
+
+export const registrationService = new RegistrationService();

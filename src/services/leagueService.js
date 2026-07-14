@@ -1,8 +1,15 @@
+import BaseRepository from './baseRepository';
+
 /**
  * League Service
- * Phase 2: League data operations
+ * Manages League CRUD operations
  */
+class LeagueService extends BaseRepository {
+  constructor() {
+    super('league');
+  }
 
-// export const getLeagues = async () => {};
-// export const getLeagueById = async (id) => {};
-// export const getLeagueStandings = async (leagueId) => {};
+  // Add specific league methods here if needed
+}
+
+export const leagueService = new LeagueService();

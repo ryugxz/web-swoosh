@@ -1,25 +1,73 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { subscribeToAuthChanges, login as loginService, register as registerService, logout as logoutService, resetPassword as resetService } from '../services/authService';
+import { userService } from '../services/userService';
 
-/**
- * AuthContext - Authentication state provider
- * Phase 1: Shell only — returns unauthenticated state
- * Phase 2: Will integrate Firebase Auth
- */
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user] = useState(null);
+  const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Subscribe to Firebase Auth state changes
+    const unsubscribe = subscribeToAuthChanges(async (firebaseUser) => {
+      setLoading(true);
+      if (firebaseUser) {
+        setUser(firebaseUser);
+        try {
+          // Fetch the user's profile from Firestore
+          const userProfile = await userService.getUserProfile(firebaseUser.uid);
+          setProfile(userProfile);
+        } catch (err) {
+          console.error("Failed to fetch user profile", err);
+          setError(err);
+        }
+      } else {
+        setUser(null);
+        setProfile(null);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const login = async (email, password) => {
+    return await loginService(email, password);
+  };
+
+  const register = async (email, password, userData) => {
+    return await registerService(email, password, userData);
+  };
+
+  const logout = async () => {
+    await logoutService();
+    setUser(null);
+    setProfile(null);
+  };
+
+  const resetPassword = async (email) => {
+    return await resetService(email);
+  };
 
   const value = {
     user,
-    isAuthenticated: false,
-    isAdmin: false,
-    // Phase 2: login, logout, register functions
+    profile,
+    isAuthenticated: !!user,
+    isAdmin: profile?.role === 'admin',
+    loading,
+    error,
+    login,
+    register,
+    logout,
+    resetPassword
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   );
 }
@@ -32,3 +80,4 @@ export function useAuth() {
   }
   return context;
 }
+

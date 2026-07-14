@@ -1,8 +1,40 @@
+import BaseRepository from './baseRepository';
+
 /**
  * User Service
- * Phase 2: User profile CRUD operations
+ * Manages User profile CRUD operations
  */
+class UserService extends BaseRepository {
+  constructor() {
+    super('users');
+  }
 
-// export const getUserProfile = async (userId) => {};
-// export const updateUserProfile = async (userId, data) => {};
-// export const deleteUserAccount = async (userId) => {};
+  async createUserProfile(uid, data) {
+    const profile = {
+      uid,
+      username: data.username,
+      displayName: data.displayName,
+      email: data.email,
+      photoURL: data.photoURL || '',
+      role: 'member',
+      status: 'active',
+      emailVerified: false,
+      provider: data.provider || 'password',
+      lastLogin: new Date(),
+    };
+    
+    // We use set() instead of create() because we want to use the uid as the document ID
+    return await this.set(uid, profile);
+  }
+
+  async getUserProfile(uid) {
+    return await this.getById(uid);
+  }
+
+  async updateLastLogin(uid) {
+    return await this.update(uid, { lastLogin: new Date() });
+  }
+}
+
+export const userService = new UserService();
+

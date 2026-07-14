@@ -4,15 +4,15 @@ import { ROUTES } from '../constants';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 
 /**
- * ProtectedRoute - Requires authentication
+ * AdminRoute - Protects routes that require admin privileges
  */
-const ProtectedRoute = () => {
-  const { isAuthenticated, loading } = useAuth();
+const AdminRoute = () => {
+  const { isAuthenticated, isAdmin, loading } = useAuth();
 
   if (loading) {
     return (
       <div className="h-screen w-full flex justify-center items-center bg-swoosh-black text-swoosh-gold">
-        <LoadingSpinner message="Verifying session..." />
+        <LoadingSpinner message="Verifying access..." />
       </div>
     );
   }
@@ -21,7 +21,11 @@ const ProtectedRoute = () => {
     return <Navigate to={ROUTES.LOGIN} replace />;
   }
 
+  if (!isAdmin) {
+    return <Navigate to={ROUTES.HOME} replace />;
+  }
+
   return <Outlet />;
 };
 
-export default ProtectedRoute;
+export default AdminRoute;
