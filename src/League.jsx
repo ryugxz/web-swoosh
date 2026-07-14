@@ -6,7 +6,7 @@ function League() {
       name: "FIFA Thailand",
       description: "ลีกการแข่งขัน EAFC/FIFA ระดับประเทศประเทศไทย",
       status: "ACTIVE",
-      link: "https://fifathailand.com/"
+      link: "https://ftleagues.com/"
     },
     {
       name: "TEL Super League",
