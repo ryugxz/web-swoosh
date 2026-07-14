@@ -6,4 +6,4 @@
  *   import { db } from '@/firebase';
  *   import { db, app } from '@/firebase';
  */
-export { app, db, analytics } from './config';
+export { app, db, analytics, auth, storage } from './config';
