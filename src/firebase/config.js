@@ -23,7 +23,8 @@ console.log("ENV:", import.meta.env);
 console.log("Firebase Config", firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
+const analytics = null;
 const db = getFirestore(app);
 
 // Initialize Authentication and Storage
