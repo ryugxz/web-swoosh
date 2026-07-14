@@ -1,7 +1,6 @@
-import React from 'react';
-import kitSwoosh from './images/IMG_7891.png';
+import kitSwoosh from '../assets/images/IMG_7891.png';
 
-function Kit() {
+function KitSection() {
   return (
     <section className="bg-swoosh-black text-white py-24 px-8 border-t border-white/5">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
@@ -84,4 +83,4 @@ function Kit() {
   );
 }
 
-export default Kit;
+export default KitSection;

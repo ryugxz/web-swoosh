@@ -1,7 +1,10 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../images/logo-swoosh.png';
+import logo from '../../assets/images/logo-swoosh.png';
 
+/**
+ * Navbar - Main site navigation
+ * Moved from src/components/Navbar.jsx with dead code removed
+ */
 function Navbar() {
   const handleScroll = (e, id) => {
     e.preventDefault();
@@ -65,11 +68,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-<button 
-    onClick={() => document.getElementById('squad-section')?.scrollIntoView({ behavior: 'smooth' })}
-    className="bg-swoosh-gold text-black px-8 py-4 font-bold uppercase tracking-widest hover:scale-105 transition-transform"
->
-    Meet The Squad
-</button>

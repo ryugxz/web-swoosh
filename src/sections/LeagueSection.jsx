@@ -1,6 +1,6 @@
-import React from 'react';
+import PageHeader from '../components/ui/PageHeader';
 
-function League() {
+function LeagueSection() {
   const leagues = [
     {
       name: "FIFA Thailand",
@@ -19,10 +19,7 @@ function League() {
   return (
     <section className="bg-swoosh-black text-white py-24 px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-swoosh-gold tracking-[0.4em] uppercase text-[10px] mb-4">Competitions</p>
-          <h2 className="text-6xl font-serif italic text-swoosh-gold">Leagues & Cups</h2>
-        </div>
+        <PageHeader subtitle="Competitions" title="Leagues & Cups" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {leagues.map((league, index) => (
@@ -87,4 +84,4 @@ function League() {
   );
 }
 
-export default League;
+export default LeagueSection;

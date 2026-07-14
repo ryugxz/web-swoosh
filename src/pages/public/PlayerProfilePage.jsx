@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { db } from './firebase';
+import { db } from '../../firebase';
 import { doc, getDoc, collection, getDocs, query, orderBy } from 'firebase/firestore';
-import playerProfile from './images/player-profile.png';
-import playerPortraitStats from './images/player-portrait-stats.png';
+import playerProfile from '../../assets/images/player-profile.png';
+import playerPortraitStats from '../../assets/images/player-portrait-stats.png';
+import { calculateAge } from '../../utils/dateHelpers';
+import LoadingSpinner from '../../components/ui/LoadingSpinner';
+import ErrorState from '../../components/ui/ErrorState';
 
-const calculateAge = (dateString) => {
-  if (!dateString) return null;
-  const birthDate = new Date(dateString);
-  const today = new Date();
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const m = today.getMonth() - birthDate.getMonth();
-  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-    age--;
-  }
-  return age;
-};
-
-function PlayerProfile() {
+function PlayerProfilePage() {
   const { id } = useParams();
   const [player, setPlayer] = useState(null);
   const [otherPlayers, setOtherPlayers] = useState([]);
@@ -44,8 +35,8 @@ function PlayerProfile() {
     fetchPlayerData();
   }, [id]);
 
-  if (loading) return <div className="min-h-screen bg-swoosh-black flex items-center justify-center text-swoosh-gold uppercase tracking-[0.5em]">Loading...</div>;
-  if (!player) return <div className="min-h-screen bg-swoosh-black flex items-center justify-center text-white">Player not found.</div>;
+  if (loading) return <LoadingSpinner message="Loading Profile..." />;
+  if (!player) return <ErrorState message="Player not found." />;
 
   return (
     <div className="min-h-screen bg-swoosh-black text-white pt-24">
@@ -128,7 +119,7 @@ function PlayerProfile() {
                     strokeLinecap="round" 
                     strokeLinejoin="round"
                   >
-                    <path d="M20.38 3.46L16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.62 1.96V10a2 2 0 0 0 2 2h2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8h2a2 2 0 0 0 2-2V5.42a2 2 0 0 0-1.62-1.96z" />
+                    <path d="M20.38 3.46L16 2a4 4 0 0 0-8 0L3.62 3.46a2 2 0 0 0-1.62 1.96V10a2 2 0 0 0 2 2h2v8a2 2 0 0 0 2-2h8a2 2 0 0 0 2-2v-8h2a2 2 0 0 0 2-2V5.42a2 2 0 0 0-1.62-1.96z" />
                   </svg>
                   Buy jersey
                 </button>
@@ -169,4 +160,4 @@ function PlayerProfile() {
   );
 }
 
-export default PlayerProfile;
+export default PlayerProfilePage;

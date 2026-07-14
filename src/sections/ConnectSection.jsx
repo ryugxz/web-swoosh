@@ -1,6 +1,4 @@
-import React from 'react';
-
-function Connect() {
+function ConnectSection() {
   return (
     <section className="bg-swoosh-black text-white py-24 px-8 border-t border-white/5">
       <div className="max-w-5xl mx-auto border border-white/10 p-12 md:p-20 relative overflow-hidden bg-gradient-to-br from-swoosh-card to-black">
@@ -75,4 +73,4 @@ function Connect() {
   );
 }
 
-export default Connect;
+export default ConnectSection;

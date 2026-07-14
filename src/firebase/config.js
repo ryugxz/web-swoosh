@@ -1,0 +1,31 @@
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAnalytics } from 'firebase/analytics';
+// import { getAuth } from 'firebase/auth';
+// import { getStorage } from 'firebase/storage';
+
+/**
+ * Firebase configuration
+ * Uses environment variables via Vite's import.meta.env
+ */
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+
+// Phase 2: Uncomment when implementing authentication
+// const auth = getAuth(app);
+
+// Phase 2: Uncomment when implementing file storage
+// const storage = getStorage(app);
+
+export { app, db, analytics };

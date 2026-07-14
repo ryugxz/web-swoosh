@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { db } from './firebase';
+import { db } from '../firebase';
 import { Link } from 'react-router-dom';
 import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-import playerProfile from './images/player-profile.png';
+import playerProfile from '../assets/images/player-profile.png';
+import PageHeader from '../components/ui/PageHeader';
 
-function Squad() {
+function SquadSection() {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
@@ -21,11 +22,8 @@ function Squad() {
   const sparePlayers = players.filter(p => p.status === 'spare');
 
   return (
-    <div className="bg-swoosh-black text-white min-h-screen font-serif">
-      <div className="text-center py-16">
-        <p className="text-swoosh-gold tracking-widest uppercase text-sm mb-2">The Roster</p>
-        <h1 className="text-5xl md:text-6xl text-swoosh-gold italic">Meet The Squad</h1>
-      </div>
+    <div className="bg-swoosh-black text-white min-h-screen font-serif py-16">
+      <PageHeader subtitle="The Roster" title="Meet The Squad" />
 
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
         {officialRoster.map(player => (
@@ -77,4 +75,4 @@ function Squad() {
   );
 }
 
-export default Squad;
+export default SquadSection;
